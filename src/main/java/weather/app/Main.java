@@ -1,5 +1,8 @@
 package weather.app;
 
+import weather.app.dto.WeatherDto;
+import weather.app.service.YandexApiService;
+
 import java.util.Scanner;
 
 public class Main {
@@ -43,7 +46,7 @@ public class Main {
                     System.out.println(Main.MESSAGE_WARNING_LIMIT_MAX);
                 }
 
-                YandexApiServiceDto dto = yandexApiService.getTemp(lat, lon, limit);
+                WeatherDto dto = yandexApiService.getTemp(lat, lon, limit);
 
                 System.out.println(MESSAGE_OUTPUT_CURRENT_TEMP + dto.getCurrentTemp());
                 if (limit > 0) {

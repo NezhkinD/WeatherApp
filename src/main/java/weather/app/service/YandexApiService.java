@@ -1,8 +1,9 @@
-package weather.app;
+package weather.app.service;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import weather.app.dto.WeatherDto;
 
 import java.io.IOException;
 import java.net.URI;
@@ -22,7 +23,7 @@ public class YandexApiService {
         this.yandexApiAddress = dotenv.get("YANDEX_API_ADDRESS");
     }
 
-    public YandexApiServiceDto getTemp(double lat, double lon, int limit) throws URISyntaxException, IOException, InterruptedException {
+    public WeatherDto getTemp(double lat, double lon, int limit) throws URISyntaxException, IOException, InterruptedException {
         String uri = yandexApiAddress + "?lat=" + lat + "&lon=" + lon;
         if (limit > 0) {
             uri = uri + "&limit=" + limit;
@@ -35,12 +36,12 @@ public class YandexApiService {
 
         JSONObject jsonResponse = new JSONObject(response.body());
         int currentTemp = jsonResponse.getJSONObject("fact").getInt("temp");
-        YandexApiServiceDto yandexApiServiceDto = new YandexApiServiceDto(jsonResponse, currentTemp);
+        WeatherDto yandexApiServiceDto = new WeatherDto(jsonResponse, currentTemp);
 
         return this.getAvgTemp(jsonResponse, yandexApiServiceDto);
     }
 
-    private YandexApiServiceDto getAvgTemp(JSONObject jsonObject, YandexApiServiceDto dto) {
+    private WeatherDto getAvgTemp(JSONObject jsonObject, WeatherDto dto) {
         ArrayList<Integer> avgTemps = new ArrayList<Integer>();
         ArrayList<String> dates = new ArrayList<String>();
 

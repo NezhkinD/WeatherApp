@@ -1,24 +1,16 @@
-package weather.app;
+package weather.app.dto;
 
-import io.github.cdimascio.dotenv.Dotenv;
-import org.json.JSONArray;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.ArrayList;
 
-public class YandexApiServiceDto {
+public class WeatherDto {
     private JSONObject yandexJsonResponse;
     private int currentTemp;
     private String avgTempForPeriod;
     private ArrayList<String> avgTempPeriods;
 
-    public YandexApiServiceDto(JSONObject yandexJsonResponse, int currentTemp) {
+    public WeatherDto(JSONObject yandexJsonResponse, int currentTemp) {
         this.yandexJsonResponse = yandexJsonResponse;
         this.currentTemp = currentTemp;
         this.avgTempPeriods = new ArrayList<>();
